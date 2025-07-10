@@ -1,0 +1,29 @@
+<h2>Search Rooms</h2>
+<form method="get">
+    <input type="text" name="city" placeholder="Enter city">
+    <input type="submit" value="Search">
+</form>
+{% for room in rooms %}
+    <p>{{ room }} - <a href="{% url 'book_room' room.id %}">Book</a> | <a href="{% url 'view_price' room.id %}">View Price</a></p>
+{% endfor %}
+{% extends 'booking/base.html' %}
+{% block content %}
+<h2>Search Available Rooms</h2>
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="city" placeholder="Enter city" required>
+  <button type="submit" class="btn btn-success">Search</button>
+</form>
+
+{% if city %}
+  <h4>Results for "{{ city }}"</h4>
+  {% for room in rooms %}
+    <div class="card p-2 mb-2">
+      <p>Hotel: {{ room.hotel.name }} | Room Type: {{ room.room_type }} | Price: {{ room.price }}</p>
+      <a href="{% url 'book_room' room.id %}" class="btn btn-primary">Book</a>
+    </div>
+  {% empty %}
+    <p>No available rooms found in {{ city }}.</p>
+  {% endfor %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,6 @@
+<h2>Your Bookings</h2>
+{% for booking in bookings %}
+    <p>{{ booking.room }} | Check-in: {{ booking.check_in }} | Check-out: {{ booking.check_out }}</p>
+{% empty %}
+    <p>No bookings yet.</p>
+{% endfor %}

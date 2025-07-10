@@ -1,0 +1,15 @@
+<h2>Register/Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+{% extends 'booking/base.html' %}
+{% block content %}
+<h2>Register</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock %}
